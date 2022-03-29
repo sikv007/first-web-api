@@ -40,7 +40,7 @@ public class UserController : ControllerBase
   public async Task<IActionResult> Delete(int id)
   {
     User? user = await _context.User.FindAsync(id);
-    _context.User.Remove(user);
+    if (user != null) _context.User.Remove(user);
     await _context.SaveChangesAsync();
     return NoContent();
   }

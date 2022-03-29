@@ -6,5 +6,11 @@ using usersApi.Models;
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
+  private readonly UsersAPIContext _context;
+
+  public UserController(UsersAPIContext context)
+  {
+    _context = context;
+  }
   
 }

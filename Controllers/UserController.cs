@@ -17,7 +17,15 @@ public class UserController : ControllerBase
   public async Task<IActionResult> Get()
   {
     List<User> users = await _context.User.ToListAsync();
-    if(users == null) return BadRequest();
+    if (users == null) return BadRequest();
     return Ok(users);
+  }
+
+  [HttpPut]
+  public async Task<IActionResult> Put(User editedUser)
+  {
+    _context.Entry(editedUser).State = EntityState.Modified;
+    await _context.SaveChangesAsync();
+    return NoContent();
   }
 }

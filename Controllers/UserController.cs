@@ -29,6 +29,16 @@ public class UserController : ControllerBase
     return Ok(newUser);
   }
 
+
+  [HttpDelete]
+  public async Task<IActionResult> Delete(int id)
+  {
+    User? user = await _context.User.FindAsync(id);
+    _context.User.Remove(user);
+    await _context.SaveChangesAsync();
+    return NoContent();
+  }
+
   [HttpPut]
   public async Task<IActionResult> Put(User editedUser)
   {
@@ -36,4 +46,5 @@ public class UserController : ControllerBase
     await _context.SaveChangesAsync();
     return NoContent();
   }
+
 }

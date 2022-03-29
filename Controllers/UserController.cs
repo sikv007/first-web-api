@@ -21,6 +21,14 @@ public class UserController : ControllerBase
     return Ok(users);
   }
 
+  [HttpPost]
+  public async Task<IActionResult> Post(User newUser)
+  {
+    _context.User.Add(newUser);
+    await _context.SaveChangesAsync();
+    return Ok(newUser);
+  }
+
   [HttpPut]
   public async Task<IActionResult> Put(User editedUser)
   {

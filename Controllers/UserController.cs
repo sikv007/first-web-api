@@ -21,6 +21,13 @@ public class UserController : ControllerBase
     return Ok(users);
   }
 
+  [HttpGet("{id}")]
+  public async Task<IActionResult> Get(int id)
+  {
+    User? user = await _context.User.FindAsync(id);
+    return Ok(user);
+  }
+
   [HttpPost]
   public async Task<IActionResult> Post(User newUser)
   {
@@ -28,7 +35,6 @@ public class UserController : ControllerBase
     await _context.SaveChangesAsync();
     return Ok(newUser);
   }
-
 
   [HttpDelete]
   public async Task<IActionResult> Delete(int id)

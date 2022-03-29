@@ -12,5 +12,12 @@ public class UserController : ControllerBase
   {
     _context = context;
   }
-  
+
+  [HttpGet]
+  public async Task<IActionResult> Get()
+  {
+    List<User> users = await _context.User.ToListAsync();
+    if(users == null) return BadRequest();
+    return Ok(users);
+  }
 }
